@@ -27,6 +27,13 @@ $any-hover-color: #666;
   }
 }
 
+.func {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 11px;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
 
 .field-pill {
   @extend .field;
@@ -56,6 +63,18 @@ $any-hover-color: #666;
 
 .text {
   flex-grow: 1;
+}
+
+.fn-text {
+  @extend .text;
+  flex-grow: 1;
+
+  &::before {
+    content: "(";
+  }
+  &::after {
+    content: ")";
+  }
 }
 
 // .field-info {

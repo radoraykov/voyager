@@ -9,6 +9,7 @@ import {Type} from 'vega-lite/build/src/type';
 import {DraggableType, FieldParentType} from '../../constants';
 import {ShelfFieldDef} from '../../models';
 import {ShelfId} from '../../models/shelf';
+import {functionName} from '../../models/shelf/encoding';
 
 /**
  * Props for react-dnd of Field
@@ -64,6 +65,10 @@ class FieldBase extends React.PureComponent<FieldProps, {}> {
     const {field, title} = fieldDef;
 
     const isWildcardField = isWildcard(field) || this.props.isEnumeratedWildcardField;
+    const fnName = functionName(fieldDef);
+
+    /** Whether the fieldDef has a function that involves field. (Count doesn't involve a specific field.) */
+    const isFieldFn = fnName && fnName !== 'count';
 
     const component = (
       <span
@@ -71,8 +76,9 @@ class FieldBase extends React.PureComponent<FieldProps, {}> {
         onDoubleClick={this.onDoubleClick}
       >
         {caretTypeSpan({caretHide, caretOnClick, type: fieldDef.type})}
-        <span styleName="text">
-          {title || field}
+        {this.funcSpan(fnName)}
+        <span styleName={isFieldFn ? 'fn-text' : 'text'}>
+          {title || (field !== '*' ? field : '')}
         </span>
         {this.addSpan()}
         {this.removeSpan()}
@@ -91,6 +97,14 @@ class FieldBase extends React.PureComponent<FieldProps, {}> {
     const onRemove = this.props.onRemove;
     return onRemove && (
       <span><a onClick={onRemove}><i className="fa fa-times"/></a></span>
+    );
+  }
+
+  private funcSpan(fnName: string) {
+    return (
+      <span styleName="func" title={fnName}>
+        {fnName}
+      </span>
     );
   }
 

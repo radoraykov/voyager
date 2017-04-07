@@ -66,7 +66,7 @@ export const FieldList = connect(
   (state: State) => {
     return {
       fieldDefs: getSchemaFieldDefs(state).concat([
-        {aggregate: 'count', field: '*', type: 'quantitative', title: 'Number of Records'}
+        {aggregate: 'count', field: '*', type: 'quantitative'}
       ])
     };
   },

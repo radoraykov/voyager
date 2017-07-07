@@ -1,4 +1,5 @@
 import {autoAddFieldQuery, DEFAULT_CHOOSE_BY, DEFAULT_ORDER_BY, toQuery} from './index';
+import {DEFAULT_LOGGER} from './logger';
 
 describe('models/shelf', () => {
   describe('autoAddFieldQuery', () => {
@@ -38,7 +39,8 @@ describe('models/shelf', () => {
           anyEncodings: [],
           config: {numberFormat: 'd'}
         },
-        specPreview: null
+        specPreview: null,
+        logger: DEFAULT_LOGGER
       })).toEqual({
         spec: {
           mark: 'point',
@@ -66,7 +68,8 @@ describe('models/shelf', () => {
           anyEncodings: [],
           config: {numberFormat: 'd'}
         },
-        specPreview: null
+        specPreview: null,
+        logger: DEFAULT_LOGGER
       })).toEqual({
         spec: {
           mark: 'point',
@@ -95,7 +98,8 @@ describe('models/shelf', () => {
           anyEncodings: [],
           config: {numberFormat: 'd'}
         },
-        specPreview: null
+        specPreview: null,
+        logger: DEFAULT_LOGGER
       })).toEqual({
         spec: {
           mark: 'point',

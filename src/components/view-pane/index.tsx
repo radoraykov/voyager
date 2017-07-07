@@ -9,8 +9,10 @@ import {ActionHandler, createDispatchHandler} from '../../actions/redux-action';
 import {ShelfAction} from '../../actions/shelf';
 import {State} from '../../models';
 import {extractPlotObjects, PlotObject} from '../../models/plot';
+import {Logger} from '../../models/shelf/logger';
 import {hasWildcards} from '../../models/shelf/spec';
 import {getData, getMainResult, getQuery} from '../../selectors';
+import {getLogger} from '../../selectors/index';
 import {Plot} from '../plot';
 import {PlotList} from '../plot-list';
 import * as styles from './view-pane.scss';
@@ -19,11 +21,12 @@ export interface ViewPaneProps extends ActionHandler<ShelfAction> {
   data: Data;
   query: Query;
   mainResult: SpecQueryGroup<PlotObject>;
+  logger: Logger;
 }
 
 class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
   public render() {
-    const {data, handleAction, query, mainResult} = this.props;
+    const {data, handleAction, query, mainResult, logger} = this.props;
     const isSpecific = !hasWildcards(query.spec).hasAnyWildcard;
 
     // if there are no results, then nothing to render.
@@ -41,7 +44,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
       return (
         <div className="pane" styleName="view-pane-specific">
           <h2>Specified View</h2>
-          <Plot handleAction={handleAction} spec={spec}/>
+          <Plot handleAction={handleAction} spec={spec} logger={logger}/>
 
           {/*{JSON.stringify(this.props.query)}
 
@@ -54,7 +57,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
       return (
         <div className="pane" styleName="view-pane-gallery">
           <h2>Specified Views</h2>
-          <PlotList handleAction={handleAction} plots={plots}/>
+          <PlotList handleAction={handleAction} plots={plots} logger={logger}/>
         </div>
       );
     }
@@ -67,7 +70,8 @@ export const ViewPane = connect(
       query: getQuery(state),
 
       // FIXME: refactor the flow for this part (we should support asynchrounous request for this too)
-      mainResult: getMainResult(state)
+      mainResult: getMainResult(state),
+      logger: getLogger(state)
     };
   },
   createDispatchHandler<ShelfAction>()

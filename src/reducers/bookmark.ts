@@ -37,5 +37,9 @@ export function bookmarkReducer(bookmark: Bookmark, action: Action): Bookmark {
       delete newBookmark.bookmarks[id];
       return newBookmark;
     }
+
+    default: {
+      return bookmark;
+    }
   }
 }

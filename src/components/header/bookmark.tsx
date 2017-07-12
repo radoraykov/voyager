@@ -29,7 +29,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
     return (
       <div>
         <button onClick={this.openModal}>
-          <i className='fa fa-bookmark' /> Bookmarks {this.props.bookmark.numBookmarks}
+          <i className='fa fa-bookmark' /> Bookmarks ({this.props.bookmark.numBookmarks})
         </button>
 
         <Modal
@@ -93,7 +93,6 @@ const BookmarkRenderer = CSSModules(BookmarkBase, styles);
 
 export const BookmarkPane = connect(
   (state: State) => {
-    console.log('state.present.bookmark', state.present);
     return {
       bookmark: state.present.bookmark
     };

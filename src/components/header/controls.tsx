@@ -7,23 +7,10 @@ import { UndoRedo } from './undo-redo';
 
 class ControlsBase extends React.PureComponent<{}, {}> {
   public render() {
-    // const length =  something like bookmark.numBookmarks
-    // const bookmarkIcon = (
-    //   <button>
-    //     <i className='fa fa-bookmark' /> Bookmarks ({length})
-    //   </button>
-    // );
-
-    const bookmarkIcon = (
-      <button>
-        <i className='fa fa-bookmark' /> Bookmarks (0)
-      </button>
-    );
     return (
       <div styleName='controls'>
         {/* {showBookmarkSelector ? <BookmarkSelector /> : bookmarkIcon} */}
         <BookmarkPane/>
-        {bookmarkIcon}
         <UndoRedo/>
       </div>
     );

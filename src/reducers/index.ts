@@ -8,6 +8,9 @@ import {DEFAULT_STATE, State, StateBase} from '../models';
 import {SET_CONFIG} from '../actions/config';
 
 import {
+  BOOKMARK_ADD_PLOT,
+  BOOKMARK_MODIFY_NOTE,
+  BOOKMARK_REMOVE_PLOT,
   DATASET_INLINE_RECEIVE,
   DATASET_SCHEMA_CHANGE_FIELD_TYPE,
   DATASET_SCHEMA_CHANGE_ORDINAL_DOMAIN,
@@ -76,6 +79,11 @@ export const ACTIONS_EXCLUDED_FROM_HISTORY: ActionType[] = [
  * into its own group.
  */
 export const USER_ACTIONS: ActionType[] = [
+  // Bookmark Actions
+  BOOKMARK_ADD_PLOT,
+  BOOKMARK_MODIFY_NOTE,
+  BOOKMARK_REMOVE_PLOT,
+
   // Dataset Actions
   DATASET_SCHEMA_CHANGE_FIELD_TYPE,
   DATASET_SCHEMA_CHANGE_ORDINAL_DOMAIN,

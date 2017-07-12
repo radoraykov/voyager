@@ -1,3 +1,4 @@
+import {BookmarkAction} from './bookmark';
 import {ConfigAction} from './config';
 import {DatasetAction} from './dataset';
 import {ResultAction} from './result';
@@ -5,7 +6,7 @@ import {ShelfAction} from './shelf';
 import {ApplicationStateAction} from './state';
 import {UndoableAction} from './undo-redo';
 
-
+export * from './bookmark';
 export * from './config';
 export * from './dataset';
 export * from './result';
@@ -17,13 +18,17 @@ export * from './state';
 /**
  * Union type of all actions in our application.
  */
-export type Action = DatasetAction | ShelfAction | UndoableAction |
+export type Action = BookmarkAction | DatasetAction | ShelfAction | UndoableAction |
   ResultAction | ConfigAction | ApplicationStateAction;
 
 export type ActionType = Action['type'];
 
 // Use type to enforce that ACTION_TYPE_INDEX contains all action types.
 const ACTION_TYPE_INDEX: {[k in ActionType]: 1} = {
+  BOOKMARK_ADD_PLOT: 1,
+  BOOKMARK_MODIFY_NOTE: 1,
+  BOOKMARK_REMOVE_PLOT: 1,
+
   DATASET_SCHEMA_CHANGE_FIELD_TYPE: 1,
   DATASET_SCHEMA_CHANGE_ORDINAL_DOMAIN: 1,
 

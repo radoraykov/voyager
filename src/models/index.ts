@@ -9,6 +9,7 @@ import {Dataset, DEFAULT_DATASET} from './dataset';
 import {DEFAULT_RESULT, ResultIndex} from './result';
 import {DEFAULT_SHELF_SPEC, Shelf} from './shelf';
 
+export * from './bookmark';
 export * from './dataset';
 export * from './shelf';
 export * from './result';

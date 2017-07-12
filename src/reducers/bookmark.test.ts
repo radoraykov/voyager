@@ -46,7 +46,7 @@ describe('reducers/bookmark', () => {
       expect(bookmarkReducer(
         {
           bookmarks: {},
-          idList: [],
+          numBookmarks: 0,
           nextID: 0
         },
         {
@@ -57,7 +57,7 @@ describe('reducers/bookmark', () => {
         }
       )).toEqual({
         bookmarks: {'0': expectedBookmarkItem},
-        idList: [0],
+        numBookmarks: 1,
         nextID: 1
       } as Bookmark);
     });
@@ -82,7 +82,7 @@ describe('reducers/bookmark', () => {
       expect(bookmarkReducer(
         {
           bookmarks: {'0': bookmarkItem},
-          idList: [0],
+          numBookmarks: 1,
           nextID: 1
         },
         {
@@ -94,7 +94,7 @@ describe('reducers/bookmark', () => {
         }
       )).toEqual({
         bookmarks: {'0': expectedBookmarkItem},
-        idList: [0],
+        numBookmarks: 1,
         nextID: 1
       } as Bookmark);
     });
@@ -117,7 +117,7 @@ describe('reducers/bookmark', () => {
       expect(bookmarkReducer(
         {
           bookmarks: {'0': bookmarkItem},
-          idList: [0],
+          numBookmarks: 1,
           nextID: 1
         },
         {
@@ -128,7 +128,7 @@ describe('reducers/bookmark', () => {
         }
       )).toEqual({
         bookmarks: {},
-        idList: [],
+        numBookmarks: 0,
         nextID: 1
       } as Bookmark);
     });

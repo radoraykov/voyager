@@ -8,7 +8,7 @@ export interface BookmarkItem {
 
 export interface Bookmark {
   bookmarks: {[key: string]: BookmarkItem};
-  idList: number[];
+  numBookmarks: number;
   nextID: number;
 }
 

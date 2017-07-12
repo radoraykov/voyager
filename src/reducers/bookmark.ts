@@ -14,7 +14,7 @@ export function bookmarkReducer(bookmark: Bookmark, action: Action): Bookmark {
       };
 
       const newBookmark = {...bookmark};
-      newBookmark.idList.push(newBookmark.nextID);
+      newBookmark.numBookmarks++;
       newBookmark.nextID++;
       // javascript converts numbers to a strings for key purposes
       newBookmark.bookmarks[bookmarkItem.id] = bookmarkItem;
@@ -33,7 +33,7 @@ export function bookmarkReducer(bookmark: Bookmark, action: Action): Bookmark {
       const {id} = action.payload;
 
       const newBookmark = {...bookmark};
-      newBookmark.idList = newBookmark.idList.filter(key => key !== id);
+      newBookmark.numBookmarks--;
       delete newBookmark.bookmarks[id];
       return newBookmark;
     }

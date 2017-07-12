@@ -12,3 +12,8 @@ export interface Bookmark {
   nextID: number;
 }
 
+export const DEFAULT_BOOKMARK: Bookmark = {
+  bookmarks: {},
+  numBookmarks: 0,
+  nextID: 0
+};

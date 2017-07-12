@@ -32,6 +32,7 @@ import {
 } from '../actions';
 
 import {ActionType} from '../actions';
+import {bookmarkReducer} from './bookmark';
 import {configReducer} from './config';
 import {datasetReducer} from './dataset';
 import {resultReducer} from './result';
@@ -44,6 +45,7 @@ function reducer(state: Readonly<StateBase> = DEFAULT_STATE, action: Action): St
     return stateReducer(state, action);
   } else {
     return {
+      bookmark: bookmarkReducer(state.bookmark, action),
       config: configReducer(state.config, action),
       dataset: datasetReducer(state.dataset, action),
       shelf: shelfReducer(state.shelf, action, state.dataset.schema),

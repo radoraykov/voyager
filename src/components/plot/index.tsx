@@ -17,6 +17,7 @@ export interface PlotProps extends ActionHandler<ShelfAction> {
   fieldInfos?: PlotFieldInfo[];
   isPlotListItem?: boolean;
   scrollOnHover?: boolean;
+  showBookmarkButton?: boolean;
   showSpecifyButton?: boolean;
   spec: FacetedCompositeUnitSpec;
 }
@@ -43,13 +44,14 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
     this.onSpecify = this.onSpecify.bind(this);
   }
   public render() {
-    const {isPlotListItem, scrollOnHover, showSpecifyButton, spec} = this.props;
+    const {isPlotListItem, scrollOnHover, showBookmarkButton, showSpecifyButton, spec} = this.props;
 
     return (
       <div styleName={isPlotListItem ? 'plot-list-item-group' : 'plot-group'}>
         <div styleName="plot-info">
           <div styleName="plot-command">
             {showSpecifyButton && this.specifyButton()}
+            {showBookmarkButton && this.bookmarkButton()}
             <span id='copied' style={{display: 'none'}}> copied </span>
             {this.copySpecButton()}
           </div>
@@ -167,6 +169,13 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
       onClick={this.onSpecify}
       onMouseEnter={this.onPreviewMouseEnter}
       onMouseLeave={this.onPreviewMouseLeave}
+    />;
+  }
+
+  private bookmarkButton() {
+    return <i
+      className="fa fa-bookmark"
+      styleName="bookmark-button"
     />;
   }
 

@@ -23,6 +23,7 @@ class PlotListBase extends React.PureComponent<PlotListProps, any> {
           handleAction={handleAction}
           isPlotListItem={true}
           scrollOnHover={true}
+          showBookmarkButton={true}
           showSpecifyButton={true}
           spec={spec}
         />

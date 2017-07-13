@@ -1,13 +1,10 @@
 import * as React from 'react';
 import * as CSSModules from 'react-css-modules';
-import {connect} from 'react-redux';
 import {FacetedCompositeUnitSpec} from 'vega-lite/build/src/spec';
 
 import * as styles from './plot.scss';
 
 import * as CopyToClipboard from 'react-copy-to-clipboard';
-
-import {State} from '../../models';
 import {Bookmark} from '../../models/bookmark';
 
 import {ActionHandler} from '../../actions/redux-action';
@@ -203,18 +200,18 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
   }
 }
 
-// export const Plot = CSSModules(PlotBase, styles);
+export const Plot = CSSModules(PlotBase, styles);
 
-export const Plot = connect(
-  (state: State, ownProps: PlotProps) => {
-    // const blah = {...ownProps};
-    // blah.bookmark = state.present.bookmark;
-    // return blah;
+// export const Plot = connect(
+//   (state: State, ownProps: PlotProps) => {
+//     // const blah = {...ownProps};
+//     // blah.bookmark = state.present.bookmark;
+//     // return blah;
 
-    return {
-      ...ownProps,
-      bookmark: state.present.bookmark
-    };
-  }
-)(CSSModules(PlotBase, styles));
+//     return {
+//       ...ownProps,
+//       bookmark: state.present.bookmark
+//     };
+//   }
+// )(CSSModules(PlotBase, styles));
 

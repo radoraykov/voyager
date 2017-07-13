@@ -8,6 +8,7 @@ import {Data} from 'vega-lite/build/src/data';
 import {ActionHandler, createDispatchHandler} from '../../actions/redux-action';
 import {ShelfAction} from '../../actions/shelf';
 import {State} from '../../models';
+import {Bookmark} from '../../models/bookmark';
 import {extractPlotObjects, PlotObject} from '../../models/plot';
 import {hasWildcards} from '../../models/shelf/spec';
 import {getData, getMainResult, getQuery} from '../../selectors';
@@ -19,11 +20,12 @@ export interface ViewPaneProps extends ActionHandler<ShelfAction> {
   data: Data;
   query: Query;
   mainResult: SpecQueryGroup<PlotObject>;
+  bookmark: Bookmark;
 }
 
 class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
   public render() {
-    const {data, handleAction, query, mainResult} = this.props;
+    const {bookmark, data, handleAction, query, mainResult} = this.props;
     const isSpecific = !hasWildcards(query.spec).hasAnyWildcard;
 
     // if there are no results, then nothing to render.
@@ -41,7 +43,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
       return (
         <div className="pane" styleName="view-pane-specific">
           <h2>Specified View</h2>
-          <Plot handleAction={handleAction} spec={spec}/>
+          <Plot handleAction={handleAction} spec={spec} bookmark={bookmark}/>
 
           {/*{JSON.stringify(this.props.query)}
 
@@ -67,7 +69,8 @@ export const ViewPane = connect(
       query: getQuery(state),
 
       // FIXME: refactor the flow for this part (we should support asynchrounous request for this too)
-      mainResult: getMainResult(state)
+      mainResult: getMainResult(state),
+      bookmark: state.present.bookmark
     };
   },
   createDispatchHandler<ShelfAction>()

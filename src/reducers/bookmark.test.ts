@@ -41,13 +41,15 @@ describe('reducers/bookmark', () => {
       const plotObjectGroup = convertToPlotObjectsGroup(group, data);
       const plotObject: PlotObject = extractPlotObjects(plotObjectGroup)[0];
 
-      const expectedBookmarkItem: BookmarkItem = {plot: plotObject, notes: '', id: 0};
+      const specKey = JSON.stringify(plotObject.spec);
+      const expectedBookmarkItem: BookmarkItem = {plot: plotObject, notes: ''};
+      const expectedBookmarks = {};
+      expectedBookmarks[specKey] = expectedBookmarkItem;
 
       expect(bookmarkReducer(
         {
           bookmarks: {},
           numBookmarks: 0,
-          nextID: 0
         },
         {
           type: BOOKMARK_ADD_PLOT,
@@ -56,9 +58,8 @@ describe('reducers/bookmark', () => {
           }
         }
       )).toEqual({
-        bookmarks: {'0': expectedBookmarkItem},
+        bookmarks: expectedBookmarks,
         numBookmarks: 1,
-        nextID: 1
       } as Bookmark);
     });
 
@@ -75,27 +76,31 @@ describe('reducers/bookmark', () => {
       const data = {url: 'a/data/set.csv'};
       const plotObjectGroup = convertToPlotObjectsGroup(group, data);
       const plotObject: PlotObject = extractPlotObjects(plotObjectGroup)[0];
-      const bookmarkItem: BookmarkItem = {plot: plotObject, notes: '', id: 0};
+      const bookmarkItem: BookmarkItem = {plot: plotObject, notes: ''};
 
-      const expectedBookmarkItem: BookmarkItem = {plot: plotObject, notes: 'This is very interesting.', id: 0};
+      const specKey = JSON.stringify(plotObject.spec);
+      const originalBookmarks = {};
+      originalBookmarks[specKey] = bookmarkItem;
+
+      const expectedBookmarkItem: BookmarkItem = {plot: plotObject, notes: 'This is very interesting.'};
+      const expectedBookmarks = {};
+      expectedBookmarks[specKey] = expectedBookmarkItem;
 
       expect(bookmarkReducer(
         {
-          bookmarks: {'0': bookmarkItem},
+          bookmarks: originalBookmarks,
           numBookmarks: 1,
-          nextID: 1
         },
         {
           type: BOOKMARK_MODIFY_NOTE,
           payload: {
             notes: 'This is very interesting.',
-            id: 0
+            plot: plotObject
           }
         }
       )).toEqual({
-        bookmarks: {'0': expectedBookmarkItem},
+        bookmarks: expectedBookmarks,
         numBookmarks: 1,
-        nextID: 1
       } as Bookmark);
     });
 
@@ -112,24 +117,26 @@ describe('reducers/bookmark', () => {
       const data = {url: 'a/data/set.csv'};
       const plotObjectGroup = convertToPlotObjectsGroup(group, data);
       const plotObject: PlotObject = extractPlotObjects(plotObjectGroup)[0];
-      const bookmarkItem: BookmarkItem = {plot: plotObject, notes: '', id: 0};
+      const bookmarkItem: BookmarkItem = {plot: plotObject, notes: ''};
+
+      const specKey = JSON.stringify(plotObject.spec);
+      const originalBookmarks = {};
+      originalBookmarks[specKey] = bookmarkItem;
 
       expect(bookmarkReducer(
         {
-          bookmarks: {'0': bookmarkItem},
+          bookmarks: originalBookmarks,
           numBookmarks: 1,
-          nextID: 1
         },
         {
           type: BOOKMARK_REMOVE_PLOT,
           payload: {
-            id: 0
+            plot: plotObject
           }
         }
       )).toEqual({
         bookmarks: {},
         numBookmarks: 0,
-        nextID: 1
       } as Bookmark);
     });
   });

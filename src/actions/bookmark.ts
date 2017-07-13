@@ -10,11 +10,11 @@ export type BookmarkAddPlot = ReduxAction<typeof BOOKMARK_ADD_PLOT, {
 
 export const BOOKMARK_REMOVE_PLOT = 'BOOKMARK_REMOVE_PLOT';
 export type BookmarkRemovePlot = ReduxAction<typeof BOOKMARK_REMOVE_PLOT, {
-  id: number
+  plot: PlotObject
 }>;
 
 export const BOOKMARK_MODIFY_NOTE = 'BOOKMARK_MODIFY_NOTE';
 export type BookmarkModifyNote = ReduxAction<typeof BOOKMARK_MODIFY_NOTE, {
   notes: string,
-  id: number
+  plot: PlotObject
 }>;

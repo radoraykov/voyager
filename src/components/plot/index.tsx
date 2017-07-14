@@ -50,6 +50,11 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
   public render() {
     const {isPlotListItem, scrollOnHover, showBookmarkButton, showSpecifyButton, spec} = this.props;
 
+    let notesDiv;
+    if (this.props.bookmark.bookmarks[JSON.stringify(spec)]) {
+      notesDiv = (<span>INSERT NOTES DIV BOX HERE</span>);
+    }
+
     return (
       <div styleName={isPlotListItem ? 'plot-list-item-group' : 'plot-group'}>
         <div styleName="plot-info">
@@ -80,6 +85,7 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
         >
           <VegaLite spec={spec}/>
         </div>
+        {notesDiv}
       </div>
     );
   }

@@ -65,8 +65,9 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
       const {spec, fieldInfos} = plot;
 
       return (
-        <div>
+        <div key={JSON.stringify(spec)}>
           <Plot
+            bookmark={this.props.bookmark}
             key={JSON.stringify(spec)}
             fieldInfos={fieldInfos}
             handleAction={null} // what does this do???
@@ -76,7 +77,6 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
             showSpecifyButton={true}
             spec={spec}
           />
-          <span>INSERT NOTES DIV BOX HERE</span>
         </div>
       );
     });

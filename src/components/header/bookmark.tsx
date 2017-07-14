@@ -70,7 +70,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
             bookmark={this.props.bookmark}
             key={JSON.stringify(spec)}
             fieldInfos={fieldInfos}
-            handleAction={null} // what does this do???
+            handleAction={this.props.handleAction}
             isPlotListItem={true}
             scrollOnHover={true}
             showBookmarkButton={true}

@@ -37,10 +37,6 @@ export class BookmarkButtonBase extends React.PureComponent<BookmarkProps, any> 
     this.onKeepBookmark = this.onKeepBookmark.bind(this);
   }
 
-  componentWillMount() {
-    this.setState({isBookmarked: this.props.bookmark.bookmarks[this.props.plotObjectSpec.toString()]});
-  }
-
   public render() {
     const bookmarkColor = (this.state.isBookmarked) ? '#0c96d0' : '#aaa';
     const openDialog = (this.state.openDialog) ? 'block' : 'none';
@@ -56,7 +52,7 @@ export class BookmarkButtonBase extends React.PureComponent<BookmarkProps, any> 
               <i className="fa fa-trash-o">Remove it</i>
             </a>
             <a onClick={this.onKeepBookmark}>
-              <i className="fa fa-bookmark">Call keep bookmark function</i>
+              <i className="fa fa-bookmark">Keep it</i>
             </a>
           </div>
         </div>

@@ -7,15 +7,28 @@ export function bookmarkReducer(bookmark: Bookmark, action: Action): Bookmark {
     case BOOKMARK_ADD_PLOT: {
       const {plot} = action.payload;
 
-      const bookmarkItem: BookmarkItem = {
-        plot: plot,
-        notes: '',
-      };
 
-      const newBookmark = {...bookmark};
-      newBookmark.numBookmarks++;
+      let newBookmark;
+
+      console.log('bookmark is window.bookmark');
+      window['bookmark'] = bookmark;
+
+
       const specKey = JSON.stringify(plot.spec);
-      newBookmark.bookmarks[specKey] = bookmarkItem;
+      console.log('specKey is window.specKey');
+
+      if (!bookmark.bookmarks[specKey]) {
+        newBookmark = {...bookmark};
+
+        const bookmarkItem: BookmarkItem = {
+          plot: plot,
+          notes: '',
+        };
+
+        newBookmark.numBookmarks++;
+        newBookmark.bookmarks[specKey] = bookmarkItem;
+      }
+
       return newBookmark;
     }
 

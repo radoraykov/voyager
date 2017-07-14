@@ -7,16 +7,8 @@ export function bookmarkReducer(bookmark: Bookmark, action: Action): Bookmark {
     case BOOKMARK_ADD_PLOT: {
       const {plot} = action.payload;
 
-
       let newBookmark;
-
-      console.log('bookmark is window.bookmark');
-      window['bookmark'] = bookmark;
-
-
       const specKey = JSON.stringify(plot.spec);
-      console.log('specKey is window.specKey');
-
       if (!bookmark.bookmarks[specKey]) {
         newBookmark = {...bookmark};
 

@@ -23,14 +23,6 @@ export class BookmarkButtonBase extends React.PureComponent<BookmarkProps, any> 
       isBookmarked: !!this.props.bookmark.bookmarks[JSON.stringify(this.props.plotObjectSpec)], openDialog: false
     };
 
-    console.log(
-      'props thingy',
-      JSON.stringify(this.props.plotObjectSpec)
-    );
-    window['propsthingy'] = JSON.stringify(this.props.plotObjectSpec);
-    window['blah'] = this.props.bookmark.bookmarks;
-
-    console.log('bookmark already exits?: ', this.props.bookmark.bookmarks[JSON.stringify(this.props.plotObjectSpec)]);
     this.onBookmarkRemove = this.onBookmarkRemove.bind(this);
     this.onBookmarkAdd = this.onBookmarkAdd.bind(this);
     this.onBookmarkClick = this.onBookmarkClick.bind(this);

@@ -53,7 +53,6 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
   }
 
   private renderBookmarks(bookmark: Bookmark) {
-    console.log('all my bookmarks:', bookmark.bookmarks);
     const bookmarks = bookmark.bookmarks;
     const plots: PlotObject[] = [];
     for (const id in bookmarks) {

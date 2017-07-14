@@ -60,13 +60,7 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
         <div styleName="plot-info">
           <div styleName="plot-command">
             {showSpecifyButton && this.specifyButton()}
-            {/* {showBookmarkButton && this.bookmarkButton()} */}
-            <BookmarkButton
-              bookmark = {this.props.bookmark}
-              plotObjectFieldInfos = {this.props.fieldInfos}
-              plotObjectSpec = {this.props.spec}
-              handleAction = {this.props.handleAction}
-            />
+            {showBookmarkButton && this.bookmarkButton()}
             <span id='copied' style={{display: 'none'}}> copied </span>
             {this.copySpecButton()}
           </div>
@@ -189,10 +183,14 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
   }
 
   private bookmarkButton() {
-    return <i
-      className="fa fa-bookmark"
-      styleName="bookmark-button"
-    />;
+    return (
+      <BookmarkButton
+        bookmark = {this.props.bookmark}
+        plotObjectFieldInfos = {this.props.fieldInfos}
+        plotObjectSpec = {this.props.spec}
+        handleAction = {this.props.handleAction}
+      />
+    );
   }
 
   private copySpecButton() {
@@ -215,17 +213,3 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
 }
 
 export const Plot = CSSModules(PlotBase, styles);
-
-// export const Plot = connect(
-//   (state: State, ownProps: PlotProps) => {
-//     // const blah = {...ownProps};
-//     // blah.bookmark = state.present.bookmark;
-//     // return blah;
-
-//     return {
-//       ...ownProps,
-//       bookmark: state.present.bookmark
-//     };
-//   }
-// )(CSSModules(PlotBase, styles));
-

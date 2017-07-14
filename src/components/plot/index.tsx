@@ -7,14 +7,16 @@ import * as styles from './plot.scss';
 import * as CopyToClipboard from 'react-copy-to-clipboard';
 import {Bookmark} from '../../models/bookmark';
 
+import {BookmarkAction} from '../../actions/bookmark';
 import {ActionHandler} from '../../actions/redux-action';
 import {SHELF_SPEC_LOAD, SHELF_SPEC_PREVIEW, SHELF_SPEC_PREVIEW_DISABLE, ShelfAction} from '../../actions/shelf';
 import {PLOT_HOVER_MIN_DURATION} from '../../constants';
 import {PlotFieldInfo} from '../../models/plot';
 import {Field} from '../field/index';
 import {VegaLite} from '../vega-lite/index';
+import {BookmarkButton} from './bookmarkbutton';
 
-export interface PlotProps extends ActionHandler<ShelfAction> {
+export interface PlotProps extends ActionHandler<ShelfAction | BookmarkAction> {
   fieldInfos?: PlotFieldInfo[];
   isPlotListItem?: boolean;
   scrollOnHover?: boolean;
@@ -53,7 +55,13 @@ class PlotBase extends React.PureComponent<PlotProps, any> {
         <div styleName="plot-info">
           <div styleName="plot-command">
             {showSpecifyButton && this.specifyButton()}
-            {showBookmarkButton && this.bookmarkButton()}
+            {/* {showBookmarkButton && this.bookmarkButton()} */}
+            <BookmarkButton
+              bookmark = {this.props.bookmark}
+              plotObjectFieldInfos = {this.props.fieldInfos}
+              plotObjectSpec = {this.props.spec}
+              handleAction = {this.props.handleAction}
+            />
             <span id='copied' style={{display: 'none'}}> copied </span>
             {this.copySpecButton()}
           </div>
